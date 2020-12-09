@@ -1,0 +1,40 @@
+﻿@using DoctorAppointmentSystem.Models
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="/" class="navbar-brand">Doctor Appointment System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            @if (User.IsInRole(UserType.Patient))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Doctors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/home/contact">Approved</a>
+                </li>
+            }
+            @if (User.IsInRole(UserType.Doctor))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Requests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/home/">Scheduled</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Doctor/ListSlots">Slots</a>
+                </li>
+            }
+            <li class="nav-item">
+                <a class="nav-link" href="/home/about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/home/contact">Contact</a>
+            </li>
+        </ul>
+        <span class="navbar-text">@Html.Partial("_LoginPartial")</span>
+    </div>
+</nav>

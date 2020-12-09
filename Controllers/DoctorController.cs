@@ -1,6 +1,9 @@
 ﻿using DoctorAppointmentSystem.Models;
+using DoctorAppointmentSystem.ViewModels;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,7 +25,18 @@ namespace DoctorAppointmentSystem.Controllers
         // GET: Doctor
         public ActionResult Index()
         {
-            return View();
+            var doctorId = User.Identity.GetUserId();
+            var requests = _context.Appointments.Include(a => a.ApplicationUser).Include(a => a.Slot).Include(a => a.Slot.ApplicationUser).Where(a => a.Slot.ApplicationUserId == doctorId).ToList();
+            var viewModel = new RequestsViewModel() {
+                Appointments = requests
+            };
+            return View(viewModel);
+        }
+        public ActionResult ListSlots()
+        {
+            var currentDoctorId = User.Identity.GetUserId();
+            var slots = _context.Slots.Where(s => s.ApplicationUserId == currentDoctorId).ToList();
+            return View(slots);
         }
         public ActionResult CreateSlot()
         {
@@ -31,12 +45,13 @@ namespace DoctorAppointmentSystem.Controllers
         [HttpPost]
         public ActionResult CreateSlot(Slot slot)
         {
+            slot.Available = true;
             if(ModelState.IsValid)
             {
                 _context.Slots.Add(slot);
                 _context.SaveChanges();
             }
-            return View();
+            return View(slot);
         }
     }
 }

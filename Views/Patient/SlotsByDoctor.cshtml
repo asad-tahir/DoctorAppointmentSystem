@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "DoctorDetails";
+}
+
+<h2>@Model.DoctorName</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Available From</th>
+            <th scope="col">Available Till</th>
+            <th scope="col">Slot Available</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 1;
+            foreach (var slot in Model.Slots)
+            {
+                <tr>
+                    <th scope="row">@count@{count++;}</th>
+                    <td>@slot.AvailableFrom</td>
+                    <td>@slot.AvailableTill</td>
+                    <td>@(slot.Available ? "Yes": "No")</td>
+                    <td>
+                        @if (slot.Available)
+                        {
+                            <a href="/Patient/RequestAppointment/@slot.Id">Request Appointment</a>
+                        @*<form action="/Patient/RequestAppointment" method="post">
+                            <input id="ApplicationUserId" name="ApplicationUserId" type="text" value="@User.Identity.GetUserId()" hidden>
+                            <button type="submit" class="btn btn-link">Request Appointment</button>
+                        </form>*@
+                        }
+                </td>
+            </tr>
+        }
+        }
+    </tbody>
+</table>

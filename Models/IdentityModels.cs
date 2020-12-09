@@ -25,6 +25,7 @@ namespace DoctorAppointmentSystem.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Slot> Slots { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

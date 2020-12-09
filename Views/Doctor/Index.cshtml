@@ -1,8 +1,35 @@
-﻿
+﻿@model DoctorAppointmentSystem.ViewModels.RequestsViewModel
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Doctor - Index</h2>
 
-<a href="/Doctor/CreateSlot" class="btn btn-primary">Create New Slot</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Patient</th>
+            <th scope="col">Slot</th>
+            @*<th scope="col">Available Till</th>*@
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 1;
+            foreach (var req in Model.Appointments)
+            {
+                <tr>
+                    <th scope="row">@count@{count++;}</th>
+                    <td>@req.ApplicationUser.Name</td>
+                    <td>@req.Slot.AvailableFrom - @req.Slot.AvailableTill</td>
+                    @*<td></td>*@
+                    <td>@req.Status</td>
+                    <td><a href="#" class="btn btn-primary">Approve</a> <a href="#" class="btn btn-danger">Reject</a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

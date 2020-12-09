@@ -1,4 +1,5 @@
 ﻿using DoctorAppointmentSystem.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,27 +30,40 @@ namespace DoctorAppointmentSystem.Controllers
                           select u;
             return View(doctors);
         }
-        public ActionResult DoctorDetails(string id)
+        public ActionResult SlotsByDoctor(string id)
         {
             var doctor = _context.Users.SingleOrDefault(user => user.Id == id);
             var slots = (from s in _context.Slots
                         where s.ApplicationUserId.Equals(id)
                         select s).ToList();
-            var viewModel = new DoctorDetailsViewModel {
+            var viewModel = new DoctorDetailsViewModel() {
                 Slots = slots,
                 DoctorName = doctor.Name
             };
-            //var innerJoin = slots.Join(// outer sequence 
-            //          _context.Users,  // inner sequence 
-            //          slot => slot.ApplicationUserId,    // outerKeySelector
-            //          user => user.Id,  // innerKeySelector
-            //          (slot, user) => new  // result selector
-            //          {
-            //              DoctorName = user.Name,
-            //              AvailableFrom = slot.AvailableFrom,
-            //              AvailableTill = slot.AvailableTill
-            //          });
             return View(viewModel);
+        }
+        
+        public ActionResult RequestAppointment(int id)
+        {
+            var patientId = User.Identity.GetUserId();
+            var appointment = new Appointment() {
+                Status = AppointmentStatus.Pending,
+                ApplicationUserId = patientId,
+                SlotId = id
+            };
+            var slot = _context.Slots.SingleOrDefault(s => s.Id == id);
+            var req = _context.Appointments.FirstOrDefault(a => (a.SlotId == id && a.ApplicationUserId == patientId));
+            if(req != null)
+            {
+                return Content("Already Submitted!");
+            }
+            if (slot.Available)
+            {
+                _context.Appointments.Add(appointment);
+                _context.SaveChanges();
+                return Content("Request Submitted");
+            }
+            return Content("Request Failed!");
         }
     }
 }

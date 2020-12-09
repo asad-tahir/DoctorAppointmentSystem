@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Foolproof;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,8 +13,11 @@ namespace DoctorAppointmentSystem.Models
         [Required]
         public DateTime AvailableFrom { get; set; }
         [Required]
+        [GreaterThan("AvailableFrom")]
         public DateTime AvailableTill { get; set; }
+        public bool Available { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public string ApplicationUserId { get; set; }
+        public object Include { get; internal set; }
     }
 }
