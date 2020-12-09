@@ -7,11 +7,11 @@
 <form action="/Doctor/CreateSlot" method="post">
     <div class="form-group">
         <label for="AvailableFrom">Available From</label>
-        <input type="date" class="form-control" id="AvailableFrom" name="AvailableFrom" placeholder="Available From">
+        <input type="datetime-local" class="form-control" id="AvailableFrom" name="AvailableFrom" placeholder="Available From">
     </div>
     <div class="form-group">
         <label for="AvailableTill">Available From</label>
-        <input type="datetime" class="form-control" id="AvailableTill" name="AvailableTill" placeholder="Available Till">
+        <input type="datetime-local" class="form-control" id="AvailableTill" name="AvailableTill" placeholder="Available Till">
     </div>
     <input id="ApplicationUserId" name="ApplicationUserId" type="text" value="@User.Identity.GetUserId()" hidden>
     <button type="submit" class="btn btn-primary">Submit</button>
