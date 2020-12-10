@@ -202,6 +202,26 @@
     <Compile Include="Migrations\202012090808304_AddingAppointmentRequestsTable.Designer.cs">
       <DependentUpon>202012090808304_AddingAppointmentRequestsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012101111256_AddPrescriptionTable.cs" />
+    <Compile Include="Migrations\202012101111256_AddPrescriptionTable.Designer.cs">
+      <DependentUpon>202012101111256_AddPrescriptionTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012101114490_AddPrescriptionTable1.cs" />
+    <Compile Include="Migrations\202012101114490_AddPrescriptionTable1.Designer.cs">
+      <DependentUpon>202012101114490_AddPrescriptionTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012101220309_AddPrescriptionTableupdate.cs" />
+    <Compile Include="Migrations\202012101220309_AddPrescriptionTableupdate.Designer.cs">
+      <DependentUpon>202012101220309_AddPrescriptionTableupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012101223369_AddPrescriptionTableupdatee.cs" />
+    <Compile Include="Migrations\202012101223369_AddPrescriptionTableupdatee.Designer.cs">
+      <DependentUpon>202012101223369_AddPrescriptionTableupdatee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012101225266_AddPrescriptionTableupdat.cs" />
+    <Compile Include="Migrations\202012101225266_AddPrescriptionTableupdat.Designer.cs">
+      <DependentUpon>202012101225266_AddPrescriptionTableupdat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -209,6 +229,7 @@
     <Compile Include="Models\DoctorDetailsViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Prescription.cs" />
     <Compile Include="Models\Slot.cs" />
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -387,6 +408,8 @@
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Doctor\ListSlots.cshtml" />
     <Content Include="Views\Doctor\ScheduledAppointments.cshtml" />
+    <Content Include="Views\Patient\ApprovedAppointments.cshtml" />
+    <Content Include="Views\Doctor\WritePrescription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -417,6 +440,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012090808304_AddingAppointmentRequestsTable.resx">
       <DependentUpon>202012090808304_AddingAppointmentRequestsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012101111256_AddPrescriptionTable.resx">
+      <DependentUpon>202012101111256_AddPrescriptionTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012101114490_AddPrescriptionTable1.resx">
+      <DependentUpon>202012101114490_AddPrescriptionTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012101220309_AddPrescriptionTableupdate.resx">
+      <DependentUpon>202012101220309_AddPrescriptionTableupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012101223369_AddPrescriptionTableupdatee.resx">
+      <DependentUpon>202012101223369_AddPrescriptionTableupdatee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012101225266_AddPrescriptionTableupdat.resx">
+      <DependentUpon>202012101225266_AddPrescriptionTableupdat.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

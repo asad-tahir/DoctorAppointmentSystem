@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+using DoctorAppointmentSystem.ViewModels;
 
 namespace DoctorAppointmentSystem.Controllers
 {
@@ -64,6 +66,21 @@ namespace DoctorAppointmentSystem.Controllers
                 return Content("Request Submitted");
             }
             return Content("Request Failed!");
+        }
+
+        public ActionResult ApprovedAppointments()
+        {
+            var patientId = User.Identity.GetUserId();
+            var requests = _context.Appointments
+                .Include(a => a.ApplicationUser).Include(a => a.Slot)
+                .Include(a => a.Slot.ApplicationUser)
+                .Where(a => a.ApplicationUserId == patientId && a.Status == AppointmentStatus.Approved)
+                .ToList();
+            var viewModel = new RequestsViewModel()
+            {
+                Appointments = requests
+            };
+            return View(viewModel);
         }
     }
 }

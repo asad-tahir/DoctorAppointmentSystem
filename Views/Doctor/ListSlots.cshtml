@@ -9,43 +9,41 @@
 <p>
     @Html.ActionLink("Create New", "CreateSlot", "Doctor")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AvailableFrom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AvailableTill)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Available)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationUserId)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AvailableFrom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AvailableTill)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Available)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicationUserId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Available From</th>
+            <th scope="col">Available Till</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 1;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@count@{count++;}</th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AvailableFrom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AvailableTill)
+                    </td>
+                    <td>
+                        @if (item.Available)
+                        {
+                            <p>Not-Scheduled</p>
+                        }
+                        else
+                        {
+                            <p>Scheduled</p>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
 </table>

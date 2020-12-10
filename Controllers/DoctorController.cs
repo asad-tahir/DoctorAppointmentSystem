@@ -26,9 +26,9 @@ namespace DoctorAppointmentSystem.Controllers
         public ActionResult Index()
         {
             var doctorId = User.Identity.GetUserId();
-            var requests = _context.Appointments.Include(a => a.ApplicationUser).Include(a => a.Slot).Include(a => a.Slot.ApplicationUser).Where(a => a.Slot.ApplicationUserId == doctorId).ToList();
+            var AppointmentRequests = _context.Appointments.Include(a => a.ApplicationUser).Include(a => a.Slot).Include(a => a.Slot.ApplicationUser).Where(a => a.Slot.ApplicationUserId == doctorId).ToList();
             var viewModel = new RequestsViewModel() {
-                Appointments = requests
+                Appointments = AppointmentRequests
             };
             return View(viewModel);
         }
@@ -73,6 +73,22 @@ namespace DoctorAppointmentSystem.Controllers
             }
             return View(slot);
         }
+        public ActionResult WritePrescription(string id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult WritePrescription(Prescription prescription)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(prescription);
+            }
+            _context.Prescriptions.Add(prescription);
+            _context.SaveChanges();
+            return RedirectToAction("ScheduledAppointments");
+        }
         public ActionResult ApproveAppointment(int id)
         {
             var appointment = _context.Appointments.SingleOrDefault(a => a.Id == id);
@@ -84,6 +100,22 @@ namespace DoctorAppointmentSystem.Controllers
                 {
                     appointment.Status = AppointmentStatus.Approved;
                     slot.Available = false;
+                    _context.SaveChanges();
+                }
+            }
+            return RedirectToAction("Index");
+        }
+        public ActionResult RejectAppointment(int id)
+        {
+            var appointment = _context.Appointments.SingleOrDefault(a => a.Id == id);
+
+            if (appointment != null)
+            {
+                var slot = _context.Slots.SingleOrDefault(s => s.Id == appointment.SlotId);
+                if (slot.Available)
+                {
+                    appointment.Status = AppointmentStatus.Rejected;
+                    //slot.Available = false;
                     _context.SaveChanges();
                 }
             }

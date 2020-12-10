@@ -1,20 +1,18 @@
 ﻿@model DoctorAppointmentSystem.ViewModels.RequestsViewModel
 @using DoctorAppointmentSystem.Models
-@{ 
-    ViewBag.Title = "Appointments";
+
+@{
+    ViewBag.Title = "ApprovedAppointments";
 }
 
-<h2>Appointments</h2>
-
+<h2>ApprovedAppointments</h2>
 <table class="table table-striped">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Patient</th>
+            <th scope="col">Doctor</th>
             <th scope="col">Slot</th>
-            @*<th scope="col">Available Till</th>*@
             <th scope="col">Status</th>
-            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -24,17 +22,9 @@
             {
                 <tr>
                     <th scope="row">@count@{count++;}</th>
-                    <td>@req.ApplicationUser.Name</td>
+                    <td>@req.Slot.ApplicationUser.Name</td>
                     <td>@req.Slot.AvailableFrom - @req.Slot.AvailableTill</td>
-                    @*<td></td>*@
                     <td>@req.Status</td>
-                    @if(req.Status == AppointmentStatus.Pending)
-                    {
-                    <td><a href="/Doctor/ApproveAppointment/@req.Id" class="btn btn-primary">Approve</a> <a href="/Doctor/RejectAppointment/@req.Id" class="btn btn-danger">Reject</a></td>
-                    }
-                    else { 
-                    <td></td>
-                    }
                 </tr>
             }
         }

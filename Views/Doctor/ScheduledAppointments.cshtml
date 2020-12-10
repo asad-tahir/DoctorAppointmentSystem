@@ -28,13 +28,13 @@
                     <td>@req.Slot.AvailableFrom - @req.Slot.AvailableTill</td>
                     @*<td></td>*@
                     <td>@req.Status</td>
-                    @if (req.Status == AppointmentStatus.Pending)
+                    @if (req.Status == AppointmentStatus.Approved)
                     {
-                        <td><a href="/Doctor/ApproveAppointment/@req.Id" class="btn btn-primary">Approve</a> <a href="/Doctor/RejectRequest/@req.Id" class="btn btn-danger">Reject</a></td>
+                        <td><a href="/Doctor/WritePrescription?id=@req.ApplicationUserId" class="btn btn-primary">Write Prescription</a></td>
                     }
                     else
                     {
-                        <td></td>
+                        
                     }
                 </tr>
             }

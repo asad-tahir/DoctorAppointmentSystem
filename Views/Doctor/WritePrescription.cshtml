@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "WritePrescription";
+}
+
+<h2>WritePrescription</h2>
+
+<form action="/Doctor/WritePrescription" method="post">
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea type="text" class="form-control" id="Description" name="Description" placeholder="Description" required></textarea>
+    </div>
+    
+    <input id="DoctorId" name="DoctorId" type="text" value="@User.Identity.GetUserId()" hidden>
+    <input id="PatientId" name="PatientId" type="text" value="@ViewBag.id" hidden>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
