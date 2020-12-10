@@ -25,9 +25,9 @@ namespace DoctorAppointmentSystem.Controllers
         public ActionResult Index()
         {
             var role = _context.Roles.FirstOrDefault(r => r.Name == UserType.Doctor);
-            var doctors = from u in _context.Users
+            var doctors = (from u in _context.Users
                           where u.Roles.Any(r => r.RoleId == role.Id)
-                          select u;
+                          select u).ToList();
             return View(doctors);
         }
         public ActionResult SlotsByDoctor(string id)

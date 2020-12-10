@@ -386,6 +386,7 @@
     <Content Include="Views\Patient\SlotsByDoctor.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Doctor\ListSlots.cshtml" />
+    <Content Include="Views\Doctor\ScheduledAppointments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

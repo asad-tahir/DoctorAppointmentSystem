@@ -9,6 +9,6 @@ namespace DoctorAppointmentSystem.Models
     {
         public const string Pending = "pending";
         public const string Approved = "approved";
-        public const string Canceled = "canceled";
+        public const string Rejected = "rejected";
     }
 }

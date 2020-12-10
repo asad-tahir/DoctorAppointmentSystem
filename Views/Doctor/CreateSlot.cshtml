@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@model DoctorAppointmentSystem.Models.Slot
 @{
     ViewBag.Title = "CreateSlot";
 }
@@ -13,7 +13,8 @@
         <label for="AvailableTill">Available From</label>
         <input type="datetime-local" class="form-control" id="AvailableTill" name="AvailableTill" placeholder="Available Till">
     </div>
-    <input id="ApplicationUserId" name="ApplicationUserId" type="text" value="@User.Identity.GetUserId()" hidden>
+    <input id="Available" name="Available" type="text" value="true" hidden>
+    <input id="ApplicationUserId" name="ApplicationUserId" type="text" value="@Model.ApplicationUserId" hidden>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

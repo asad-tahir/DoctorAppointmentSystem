@@ -32,6 +32,20 @@ namespace DoctorAppointmentSystem.Controllers
             };
             return View(viewModel);
         }
+        public ActionResult ScheduledAppointments()
+        {
+            var doctorId = User.Identity.GetUserId();
+            var requests = _context.Appointments
+                .Include(a => a.ApplicationUser).Include(a => a.Slot)
+                .Include(a => a.Slot.ApplicationUser)
+                .Where(a => a.Slot.ApplicationUserId == doctorId && a.Status == AppointmentStatus.Approved)
+                .ToList();
+            var viewModel = new RequestsViewModel()
+            {
+                Appointments = requests
+            };
+            return View(viewModel);
+        }
         public ActionResult ListSlots()
         {
             var currentDoctorId = User.Identity.GetUserId();
@@ -40,18 +54,40 @@ namespace DoctorAppointmentSystem.Controllers
         }
         public ActionResult CreateSlot()
         {
-            return View();
+            var slot = new Slot()
+            {
+                //    Available = true,
+                ApplicationUserId = User.Identity.GetUserId()
+            };
+            return View(slot);
         }
         [HttpPost]
         public ActionResult CreateSlot(Slot slot)
         {
-            slot.Available = true;
+            //slot.Available = true;
             if(ModelState.IsValid)
             {
                 _context.Slots.Add(slot);
                 _context.SaveChanges();
+                return RedirectToAction("ListSlots");
             }
             return View(slot);
+        }
+        public ActionResult ApproveAppointment(int id)
+        {
+            var appointment = _context.Appointments.SingleOrDefault(a => a.Id == id);
+            
+            if(appointment != null)
+            {
+                var slot = _context.Slots.SingleOrDefault(s => s.Id == appointment.SlotId);
+                if(slot.Available)
+                {
+                    appointment.Status = AppointmentStatus.Approved;
+                    slot.Available = false;
+                    _context.SaveChanges();
+                }
+            }
+            return RedirectToAction("Index");
         }
     }
 }

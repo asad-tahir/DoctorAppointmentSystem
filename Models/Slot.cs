@@ -1,6 +1,7 @@
 ﻿using Foolproof;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,5 @@ namespace DoctorAppointmentSystem.Models
         public bool Available { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public string ApplicationUserId { get; set; }
-        public object Include { get; internal set; }
     }
 }
