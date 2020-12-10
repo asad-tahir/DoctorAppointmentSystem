@@ -1,0 +1,31 @@
+﻿@model DoctorAppointmentSystem.ViewModels.PrescriptionsListViewModel
+
+@{
+    ViewBag.Title = "Prescriptions List";
+}
+
+<h2>Prescriptions List</h2>
+<table class="table">
+    <tr>
+        <th>
+            Doctor Name
+        </th>
+
+        <th>
+            Prescription
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Prescriptions)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+        </tr>
+    }
+
+</table>

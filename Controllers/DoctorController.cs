@@ -32,6 +32,16 @@ namespace DoctorAppointmentSystem.Controllers
             };
             return View(viewModel);
         }
+        public ActionResult PrescriptionsList()
+        {
+            var doctorId = User.Identity.GetUserId();
+            var prescriptions = _context.Prescriptions.Include(p => p.Doctor).Include(p => p.Patient).Where(p => p.DoctorId == doctorId).ToList();
+            var viewModel = new PrescriptionsListViewModel()
+            {
+                Prescriptions = prescriptions
+            };
+            return View(viewModel);
+        }
         public ActionResult ScheduledAppointments()
         {
             var doctorId = User.Identity.GetUserId();

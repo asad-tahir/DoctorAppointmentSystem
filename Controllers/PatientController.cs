@@ -32,6 +32,16 @@ namespace DoctorAppointmentSystem.Controllers
                           select u).ToList();
             return View(doctors);
         }
+        public ActionResult PrescriptionsList()
+        {
+            var patientId = User.Identity.GetUserId();
+            var prescriptions = _context.Prescriptions.Include(p => p.Doctor).Include(p => p.Patient).Where(p => p.PatientId == patientId).ToList();
+            var viewModel = new PrescriptionsListViewModel()
+            {
+                Prescriptions = prescriptions
+            };
+            return View(viewModel);
+        }
         public ActionResult SlotsByDoctor(string id)
         {
             var doctor = _context.Users.SingleOrDefault(user => user.Id == id);

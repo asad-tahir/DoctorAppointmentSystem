@@ -1,7 +1,7 @@
 ﻿@model DoctorAppointmentSystem.ViewModels.RequestsViewModel
 @using DoctorAppointmentSystem.Models
 @{
-    ViewBag.Title = "Scheduled";
+    ViewBag.Title = "Scheduled Appointments";
 }
 
 <h2>Scheduled Appointments</h2>
@@ -10,10 +10,8 @@
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Patient</th>
+            <th scope="col">Patient Name</th>
             <th scope="col">Slot</th>
-            @*<th scope="col">Available Till</th>*@
-            <th scope="col">Status</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -26,8 +24,6 @@
                     <th scope="row">@count@{count++;}</th>
                     <td>@req.ApplicationUser.Name</td>
                     <td>@req.Slot.AvailableFrom - @req.Slot.AvailableTill</td>
-                    @*<td></td>*@
-                    <td>@req.Status</td>
                     @if (req.Status == AppointmentStatus.Approved)
                     {
                         <td><a href="/Doctor/WritePrescription?id=@req.ApplicationUserId" class="btn btn-primary">Write Prescription</a></td>

@@ -15,6 +15,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/Patient/ApprovedAppointments">Approved</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Patient/PrescriptionsList">Prescriptions</a>
+                </li>
             }
             @if (User.IsInRole(UserType.Doctor))
             {
@@ -26,6 +29,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/Doctor/ListSlots">Slots</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Doctor/PrescriptionsList">Prescriptions</a>
                 </li>
             }
             <li class="nav-item">
