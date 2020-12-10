@@ -26,8 +26,9 @@ namespace DoctorAppointmentSystem.Controllers
         public ActionResult Index()
         {
             var adminId = User.Identity.GetUserId();
-            var users = _context.Users.Include(u => u.Roles.ToList()).Where(u => u.Email != "admin@das.com").ToList();
-            
+            var docRoleId = _context.Roles.FirstOrDefault(r => r.Name == UserType.Doctor).Id;
+            var patientRoleId = _context.Roles.FirstOrDefault(r => r.Name == UserType.Patient).Id;
+            var users = _context.Users.Where(u => u.Roles.Any(r => r.RoleId == docRoleId || r.RoleId == patientRoleId)).ToList();
             return View(users);
         }
     }

@@ -18,7 +18,7 @@
 @foreach (var item in Model) {
 <tr>
     <td>@item.Name</td>
-    <td>@item.Roles.ToList()[0].Name</td>
+    @*<td>@item.Roles.Name</td>*@
     <td>
         @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
         @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
