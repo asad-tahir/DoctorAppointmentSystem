@@ -1,31 +1,30 @@
 ﻿@model DoctorAppointmentSystem.ViewModels.PrescriptionsListViewModel
 
 @{
-    ViewBag.Title = "Prescriptions List";
+    ViewBag.Title = "Prescriptions";
 }
 
-<h2>Prescriptions List</h2>
-<table class="table">
-    <tr>
-        <th>
-            Patient Name
-        </th>
-
-        <th>
-            Prescription
-        </th>
-    </tr>
-
-    @foreach (var item in Model.Prescriptions)
-    {
+<h2>Prescriptions For Patients</h2>
+<table class="table table-striped">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Patient.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
+            <th>Patient Name</th>
+            <th>Prescription</th>
         </tr>
-    }
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Prescriptions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Patient.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>

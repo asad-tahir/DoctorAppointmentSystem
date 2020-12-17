@@ -84,6 +84,7 @@ namespace DoctorAppointmentSystem.Models
         [Required]
         [Display(Name = "Account Type")]
         public byte UserType { get; set; }
+        public bool IsDeactivated { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -8,21 +8,21 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<body style="min-height:100vh;position:relative;">
     @Html.Partial("_Navbar")
-    <div class="container body-content">
+    <div class="container">
+        <div style="padding-bottom: 5.5rem;">
         @RenderBody()
+        </div>
+        <footer style="position: absolute; bottom: 0; width:100%; left:0 ">
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Doctor Appointment System</p>
+            <p style="padding-left:25px;">&copy; @DateTime.Now.Year - Doctor Appointment System</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <script>
-        
-    </script>
+    
 </body>
 </html>

@@ -58,6 +58,10 @@ namespace DoctorAppointmentSystem.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Content("Access Denied!");
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -69,7 +73,6 @@ namespace DoctorAppointmentSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -159,6 +162,7 @@ namespace DoctorAppointmentSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            model.IsDeactivated = false;
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name };

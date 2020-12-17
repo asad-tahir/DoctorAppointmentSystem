@@ -25,11 +25,26 @@ namespace DoctorAppointmentSystem.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            var adminId = User.Identity.GetUserId();
             var docRoleId = _context.Roles.FirstOrDefault(r => r.Name == UserType.Doctor).Id;
             var patientRoleId = _context.Roles.FirstOrDefault(r => r.Name == UserType.Patient).Id;
             var users = _context.Users.Where(u => u.Roles.Any(r => r.RoleId == docRoleId || r.RoleId == patientRoleId)).ToList();
-            return View(users);
+            
+            List<UsersViewModel> UsersWithRole = (from u in users
+                         join ur in _context.Roles
+                         on u.Roles.ToList()[0].RoleId equals ur.Id
+                         select new UsersViewModel
+                         { 
+                            Id = u.Id,
+                            Name = u.Name,
+                            RoleName = ur.Name,
+                            IsDeactivated = u.IsDeactivated
+                         }).ToList();
+            return View(UsersWithRole);
         }
+        
+        /*public JsonResult Index1()
+        {
+            return Json(new {name = "daddu"}, JsonRequestBehavior.AllowGet);
+        }*/
     }
 }

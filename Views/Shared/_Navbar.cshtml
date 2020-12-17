@@ -10,7 +10,7 @@
             @if (User.IsInRole(UserType.Patient))
             {
                 <li class="nav-item">
-                    <a class="nav-link" href="/home">Doctors</a>
+                    <a class="nav-link" href="/Patient">Doctors</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/Patient/ApprovedAppointments">Approved</a>
@@ -22,7 +22,7 @@
             @if (User.IsInRole(UserType.Doctor))
             {
                 <li class="nav-item">
-                    <a class="nav-link" href="/home">Appointments</a>
+                    <a class="nav-link" href="/Doctor/Index">Appointments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/Doctor/ScheduledAppointments">Scheduled</a>
@@ -33,6 +33,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/Doctor/PrescriptionsList">Prescriptions</a>
                 </li>
+            }
+            @if (User.IsInRole(UserType.Admin))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="/Admin/Index">Users</a>
+                </li>
+                
+                
             }
             <li class="nav-item">
                 <a class="nav-link" href="/home/about">About</a>

@@ -12,7 +12,6 @@
             <th scope="col">#</th>
             <th scope="col">Patient</th>
             <th scope="col">Slot</th>
-            @*<th scope="col">Available Till</th>*@
             <th scope="col">Status</th>
             <th scope="col">Action</th>
         </tr>
@@ -26,11 +25,10 @@
                     <th scope="row">@count@{count++;}</th>
                     <td>@req.ApplicationUser.Name</td>
                     <td>@req.Slot.AvailableFrom - @req.Slot.AvailableTill</td>
-                    @*<td></td>*@
                     <td>@req.Status</td>
                     @if(req.Status == AppointmentStatus.Pending)
                     {
-                    <td><a href="/Doctor/ApproveAppointment/@req.Id" class="btn btn-primary">Approve</a> <a href="/Doctor/RejectAppointment/@req.Id" class="btn btn-danger">Reject</a></td>
+                        <td><a href="/Doctor/ApproveAppointment/@req.Id" class="btn btn-primary">Approve</a> <a href="/Doctor/RejectAppointment/@req.Id" class="btn btn-danger">Reject</a></td>
                     }
                     else { 
                     <td></td>
