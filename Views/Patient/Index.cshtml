@@ -3,25 +3,30 @@
     ViewBag.Title = "Home";
 }
 <h2>Doctors</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Doctor Name</th>
-            <th scope="col">Available Slots</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            int count = 1;
-            foreach (var doc in Model)
-            {
-                <tr>
-                    <th scope="row">@count@{count++;}</th>
-                    <td>@doc.Name</td>
-                    <td><a href="/Patient/SlotsByDoctor/@doc.Id">View Slots for Appointment</a></td>
-                </tr>
+<div class="table-responsive">
+    <table class="table table-striped" id="list-doctors">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Doctor Name</th>
+                <th scope="col">Available Slots</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int count = 1;
+                foreach (var doc in Model)
+                {
+                    <tr>
+                        <th scope="row">@count@{count++;}</th>
+                        <td>@doc.Name</td>
+                        <td><a href="/Patient/SlotsByDoctor/@doc.Id">View Slots for Appointment</a></td>
+                    </tr>
+                }
             }
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
+@section scripts{
+    <script src="~/Scripts/app.patient.index.js"></script>    
+}

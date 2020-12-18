@@ -55,7 +55,7 @@ namespace DoctorAppointmentSystem.Controllers
             return View(viewModel);
         }
         
-        public ActionResult RequestAppointment(int id)
+        public JsonResult RequestAppointment(int id)
         {
             var patientId = User.Identity.GetUserId();
             var appointment = new Appointment() {
@@ -67,15 +67,15 @@ namespace DoctorAppointmentSystem.Controllers
             var req = _context.Appointments.FirstOrDefault(a => (a.SlotId == id && a.ApplicationUserId == patientId));
             if(req != null)
             {
-                return Content("Already Submitted!");
+                return Json(new {message = "Already Submitted!" }, JsonRequestBehavior.AllowGet);
             }
             if (slot.Available)
             {
                 _context.Appointments.Add(appointment);
                 _context.SaveChanges();
-                return Content("Request Submitted");
+                return Json(new { message = "Success!" }, JsonRequestBehavior.AllowGet);
             }
-            return Content("Request Failed!");
+            return Json(new { message = "Failed!" }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ApprovedAppointments()

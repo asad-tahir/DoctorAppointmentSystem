@@ -99,7 +99,7 @@ namespace DoctorAppointmentSystem.Controllers
             _context.SaveChanges();
             return RedirectToAction("ScheduledAppointments");
         }
-        public ActionResult ApproveAppointment(int id)
+        public JsonResult ApproveAppointment(int id)
         {
             var appointment = _context.Appointments.SingleOrDefault(a => a.Id == id);
             
@@ -111,11 +111,13 @@ namespace DoctorAppointmentSystem.Controllers
                     appointment.Status = AppointmentStatus.Approved;
                     slot.Available = false;
                     _context.SaveChanges();
+                    return Json(new { message = "success" }, JsonRequestBehavior.AllowGet);
                 }
             }
-            return RedirectToAction("Index");
+            return Json(new { message = "failed" }, JsonRequestBehavior.AllowGet);
+
         }
-        public ActionResult RejectAppointment(int id)
+        public JsonResult RejectAppointment(int id)
         {
             var appointment = _context.Appointments.SingleOrDefault(a => a.Id == id);
 
@@ -127,9 +129,10 @@ namespace DoctorAppointmentSystem.Controllers
                     appointment.Status = AppointmentStatus.Rejected;
                     //slot.Available = false;
                     _context.SaveChanges();
+                    return Json(new { message = "success" }, JsonRequestBehavior.AllowGet);
                 }
             }
-            return RedirectToAction("Index");
+            return Json(new { message = "failed" }, JsonRequestBehavior.AllowGet);
         }
     }
 }
