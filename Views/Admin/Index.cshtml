@@ -7,10 +7,10 @@
 <table id="users-table" class="table table-striped">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Actions</th>
-            <th>Deactivate</th>
+            <th scope="col">Name</th>
+            <th scope="col">Role</th>
+            <th scope="col" class="nosort">Deactivate</th>
+            <th scope="col" class="nosort"></th>
         </tr>
     </thead>
     <tbody>
@@ -19,14 +19,17 @@
         <tr>
             <td>@item.Name</td>
             <td>@item.RoleName</td>
-            <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
             <td>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="@item.Id" checked="@item.IsDeactivated">
                     <label class="custom-control-label" for="@item.Id"></label>
                 </div>
             </td>
+            <td><button class="btn btn-danger btn-sm" data-id="@item.Id">Delete</button></td>
         </tr>
     }
     </tbody>
 </table>
+@section scripts{
+    <script src="~/Scripts/app.admin.index.js"></script>
+} 

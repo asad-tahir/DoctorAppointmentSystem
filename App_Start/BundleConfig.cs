@@ -13,7 +13,8 @@ namespace DoctorAppointmentSystem
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/notify.js",
                         "~/Scripts/DataTables/jquery.dataTables.js",
-                        "~/Scripts/DataTables/datatables.bootstrap4.js"));
+                        "~/Scripts/DataTables/datatables.bootstrap4.js",
+                        "~/Scripts/bootbox.js"));
             
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

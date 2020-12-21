@@ -41,10 +41,50 @@ namespace DoctorAppointmentSystem.Controllers
                          }).ToList();
             return View(UsersWithRole);
         }
-        
-        /*public JsonResult Index1()
+        public void ActivateAccount(string id) {
+            var user = _context.Users.SingleOrDefault(u => u.Id == id);
+            if (user != null)
+            {
+                user.LockoutEndDateUtc = null;
+                user.IsDeactivated = false;
+                _context.SaveChanges();
+            }
+        }
+        public void DeactivateAccount(string id)
         {
-            return Json(new {name = "daddu"}, JsonRequestBehavior.AllowGet);
-        }*/
+            var user = _context.Users.SingleOrDefault(u => u.Id == id);
+            if (user != null)
+            {
+                user.LockoutEndDateUtc = DateTime.MaxValue;
+                user.IsDeactivated = true;
+                _context.SaveChanges();
+            }
+        }
+        
+        public void DeleteAccount(string id)
+        {
+            var user = _context.Users.SingleOrDefault(u => u.Id == id);
+            if (user != null)
+            {
+                var slots = _context.Slots.Where(s => s.ApplicationUserId == id).ToList();
+                var appointments = _context.Appointments.Where(a => a.ApplicationUserId == id).ToList();
+                var prescriptions = _context.Prescriptions.Where(p => p.DoctorId == id || p.PatientId == id).ToList();
+                foreach(var prescription in prescriptions) 
+                { 
+                    _context.Prescriptions.Remove(prescription);
+                }
+                foreach (var slot in slots)
+                {
+                    _context.Slots.Remove(slot);
+                }
+                foreach (var appointment in appointments)
+                {
+                    _context.Appointments.Remove(appointment);
+                }
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+            }
+        }
+
     }
 }
